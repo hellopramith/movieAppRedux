@@ -8,7 +8,7 @@ export default class MovieCruiser extends Component {
         super();
     
         this.state = {
-            movies : localStorage.getItem('favStorage') ? JSON.parse(localStorage.getItem('favStorage')) : []
+            movies : localStorage.getItem('favStorage') ? JSON.parse(localStorage.getItem('favStorage')) : {results:[]}
         }
     }
 
@@ -19,7 +19,7 @@ export default class MovieCruiser extends Component {
         .then(res => res.json())
         .then( response => {
             this.setState({
-                movies : response.results
+                movies : response
             }) ;
         });        
     }
@@ -28,7 +28,7 @@ export default class MovieCruiser extends Component {
         return <Fragment>
                 <Loader />
                 <Header onSearch={this.searchMovies.bind(this)}/>
-                <SearchResults movies={this.state.movies} />
+                <SearchResults movies={this.state.movies.results} />
             </Fragment>
     }
 }

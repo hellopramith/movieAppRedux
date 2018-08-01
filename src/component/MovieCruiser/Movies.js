@@ -12,35 +12,39 @@ export default class Movies extends Component {
 
     addToFav(e) {
         e.preventDefault();
+        let id = e.target.id
+        id = id.substring(4, id.length);
+
         this.setState({
             activeFav : true
         });
 
         console.log(this.props.allMovies);
 
-        // var favObj = data.results.find(function (obj) { 
-        //     return obj.id == e.target.id; 
-        // });
+        let favStorage = localStorage.getItem('favStorage') ? JSON.parse(localStorage.getItem('favStorage')) : {results:[]};
 
-        // let e = true;
+        let favObj = this.props.allMovies.find(function (obj) { 
+            return obj.id == id; 
+        });
 
-        // if (self.favStorage.results.length > 0){
-        //     self.favStorage.results.map( item => {
+        let p = true;
 
-        //         if (item.id == id){
-        //             e = false;
-        //         }
-        //     })
-        //     if (e) {
+        if (favStorage.results.length > 0){
+            favStorage.results.map( item => {
 
-        //         self.favStorage.results.push(favObj);
-        //     } 
-        // } else {
-        //     self.favStorage.results.push(favObj);
-        // }
+                if (item.id == id){
+                    p = false;
+                }
+            })
+            if (p) {
 
+                favStorage.results.push(favObj);
+            } 
+        } else {
+            favStorage.results.push(favObj);
+        }
 
-        // localStorage.setItem('favStorage', favStorage);
+        localStorage.setItem('favStorage', JSON.stringify(favStorage));
     }
 
     render() {
