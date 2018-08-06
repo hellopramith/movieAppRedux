@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import SearchArea from './SearchArea';
 
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return <nav className="navbar navbar-default navbar-fixed-top">
             <div className="container">

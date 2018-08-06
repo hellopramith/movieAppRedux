@@ -4,9 +4,9 @@ import Header from './Header';
 import SearchResults from './SearchResults';
 
 export default class MovieCruiser extends Component {
-    constructor() {
-        super();
-    
+    constructor(props) {
+        super(props);
+
         this.state = {
             movies : localStorage.getItem('favStorage') ? JSON.parse(localStorage.getItem('favStorage')) : {results:[]}
         }
